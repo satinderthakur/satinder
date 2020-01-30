@@ -1,15 +1,15 @@
 pipeline {
     agent any
      stages {
-        stage('Build') {
+        stage('Docker build') {
             steps {
-               bat "docker build -t demo ."
+               bat "docker.build('demo')"
             }
         }
          stage ('Docker push') {
             steps {   
-               bat "docker tag demo:latest 506844237526.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
-               bat "docker push 506844237526.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
+               bat "docker.withRegistry( https://506844237526.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:demo-ecr-credentials")
+               bat "docker.image('demo').push('latest')"
             }
         }     
         stage('Test') {

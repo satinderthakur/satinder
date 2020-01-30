@@ -7,8 +7,8 @@ pipeline {
             }
         }
          stage ('Docker push')
-            docker.withRegistry('https://1234567890.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:demo-ecr-credentials') {
-               docker.image('demo').push('latest')
+            docker tag demo:latest 506844237526.dkr.ecr.us-east-1.amazonaws.com/demo:latest
+            docker push 506844237526.dkr.ecr.us-east-1.amazonaws.com/demo:latest
             }
         stage('Test') {
             steps {

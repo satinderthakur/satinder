@@ -3,13 +3,13 @@ pipeline {
      stages {
         stage('Docker build') {
             steps {
-               bat "docker.build('demo')"
+               bat "docker build -t demo ."
             }
         }
          stage ('Docker push') {
             steps {   
-               bat "docker.withRegistry( https://506844237526.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:demo-ecr-credentials")
-               bat "docker.image('demo').push('latest')"
+               bat "docker tag demo:latest 506844237526.dkr.ecr.us-east-1.amazonaws.com"
+               bat "docker push 506844237526.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
             }
         }     
         stage('Test') {

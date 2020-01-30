@@ -3,6 +3,7 @@ pipeline {
      stages {
         stage('Build') {
             steps {
+                bat "Invoke-Expression -Command (Get-ECRLoginCommand -Region us-east-1).Command"
                 bat "docker build -t demo ."
             }
         }

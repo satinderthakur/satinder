@@ -8,9 +8,8 @@ pipeline {
         }
          stage ('Docker push') {
             steps {   
-               bat "docker login -u AWS 506844237526.dkr.ecr.us-east-1.amazonaws.com"
-               bat "Password:India@123"
-               bat "docker push 506844237526.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
+               bat "docker login" 
+               bat "docker push https://hub.docker.com/repositories", "docker-hub-credientials" 
             }
         }     
         stage('Test') {

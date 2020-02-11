@@ -1,17 +1,11 @@
 pipeline {
     agent any
      stages {
-        stage('Docker build') {
+        stage('Build') {
             steps {
-               bat "docker build -t demo ."
+                bat "docker build -t myimage2 ."
             }
         }
-         stage ('Docker push') {
-            steps {   
-               bat "docker login" 
-               bat "docker push https://hub.docker.com/repositories", "docker-hub-credientials" 
-            }
-        }     
         stage('Test') {
             steps {
                 bat "mvn test"
